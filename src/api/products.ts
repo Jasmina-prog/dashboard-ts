@@ -1,18 +1,9 @@
-import api from "./index";
+import api from "./request";
 
-export const addProducts = async() => await api(
-    {
-        url: 'products',
-        method: 'POST'
-    }
-)
+export const addProducts = async(data:Object) => await api.post('/products', data)
 
 export const getProducts = async() => {
-    const response = await api(
-    {
-        url: 'products',
-        method: 'GET'
-    }
-)
-    console.log(response.data);
-    }
+    const response = await api.get('/products')
+    const data =  response.data
+    console.log(data);
+}

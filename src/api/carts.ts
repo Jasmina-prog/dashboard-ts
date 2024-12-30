@@ -1,18 +1,8 @@
-import api from "./index";
+import api from "./request";
 
-export const addCarts = async() => await api(
-    {
-        url:'carts',
-        method: 'POST'
-    }
-)
+export const addCarts = async() => await api.post('/carts')
 
 export const getCarts = async() => {
-    const response = await api(
-    {
-        url: 'carts',
-        method: 'GET'
-    }
-)
-console.log(response.data);
+    const response = await api.get('/carts')
+return response.data
 }

@@ -1,20 +1,11 @@
-import api from './index'
+import api from './request'
 
 export const addUsers = async() => {
-     await api(
-        {
-            url: 'users',
-            method: 'POST'
-        }
-    )
+     await api.post('/users')
 }
 
 export const getUsers = async() => {
-    const response = await api(
-    {
-        url: 'users',
-        method: 'GET'
-    }
-)
+    const response = await api.get('/users')
     console.log(response.data);
+    return response.data
 }
