@@ -6,6 +6,6 @@ export const addUsers = async() => {
 
 export const getUsers = async() => {
     const response = await api.get('/users')
-    console.log(response.data);
-    return response.data
+    // console.log(response.data);
+    return response.data.users
 }

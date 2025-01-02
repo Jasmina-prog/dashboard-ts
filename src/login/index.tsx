@@ -5,12 +5,19 @@ import api from '../api/request';
 import { useMutation } from '@tanstack/react-query';
 import ButtonGlobal  from '../components/Button';
 import { useNavigate } from 'react-router-dom';
-
+import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
 // import {CustomAxiosRequestConfig} from '../api/request'
 
 const { Title, Text } = Typography;
 
 export function Login(props:any) {
+    const useFormSchema = z.object({
+        username: z.string(),
+        password: z.string(),
+        remember: z.boolean()
+    })
+    type FormType = z.infer<typeof useFormSchema>
 
     const {handleSubmit, control} = useForm<FormTypes>()
     const navigate = useNavigate()
@@ -21,10 +28,16 @@ export function Login(props:any) {
         password?:string;
         }
 
-    const onSubmitFn = (data:Object) =>{
+    const onSubmitFn = (data:FormTypes) =>{
         mutate(data)
         console.log(data);
-        
+        const result = useFormSchema.safeParse(data)
+        if(result.success){
+            console.log('successful');
+        } else{
+            console.log('error');
+            
+        }
     }
 
     const userLogin = async(data: Object) => {

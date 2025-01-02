@@ -1,7 +1,9 @@
+import { MenuGlobal } from "../../components/Menu";
+
 export function Carts(){
     return(
         <>
-        <h1>Carts page</h1>
+        <MenuGlobal name='Carts Page'/>
         </>
     )
 }

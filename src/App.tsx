@@ -13,7 +13,24 @@ const queryClient = new QueryClient
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-
+  const routeData = [
+    {
+      path:'/main',
+      page: <MainPage/>
+    },
+    {
+      path:'/users',
+      page: <Users/>
+    },
+    {
+      path:'/products',
+      page: <Products/>
+    },
+    {
+      path:'/carts',
+      page: <Carts/>
+    },
+  ]
   return (
     <>    
       <BrowserRouter>
@@ -23,10 +40,11 @@ function App() {
         </Routes>
     </QueryClientProvider>
     <Routes>
-      <Route path='/main' element={<ProtectedRoute isAuthenticated={isAuthenticated}><MainPage/></ProtectedRoute>}/>
-      <Route path='/users' element={<ProtectedRoute isAuthenticated={isAuthenticated}><Users/></ProtectedRoute>}/>
-      <Route path='/products' element={<ProtectedRoute isAuthenticated={isAuthenticated}><Products/></ProtectedRoute>}/>
-      <Route path='/carts' element={<ProtectedRoute isAuthenticated={isAuthenticated}><Carts/></ProtectedRoute>}/>
+      {
+        routeData.map((el, index)=>{
+          return <Route key={index} path={el.path} element={<ProtectedRoute isAuthenticated={isAuthenticated}>{el.page}</ProtectedRoute>}/>
+        })
+      }
     </Routes>
       </BrowserRouter>
     </>

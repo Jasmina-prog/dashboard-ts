@@ -1,7 +1,12 @@
+import { getUsers } from "../../api/users";
+import { MenuGlobal } from "../../components/Menu";
+
 export function Users(){
+    console.log(getUsers());
+    
     return(
         <>
-        <h1>Users Page</h1>
+        <MenuGlobal name='Users Page'/>
         </>
     )
 }

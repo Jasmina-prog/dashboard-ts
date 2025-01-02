@@ -1,9 +1,9 @@
+import { MenuGlobal } from "../../components/Menu";
 
 export function Products(){
-    
     return(
         <>
-        <h1>Product page</h1>
+        <MenuGlobal name='Products Page'/>
         </>
     )
 }
