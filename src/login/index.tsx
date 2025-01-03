@@ -11,24 +11,21 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 const { Title, Text } = Typography;
 
-export function Login(props:any) {
+export function Login() {
     const useFormSchema = z.object({
         username: z.string(),
         password: z.string(),
-        remember: z.boolean()
+        remember: z.boolean().optional()
     })
     type FormType = z.infer<typeof useFormSchema>
 
-    const {handleSubmit, control} = useForm<FormTypes>()
+    const {handleSubmit, control, formState:{errors}} = useForm<FormType>({
+        resolver: zodResolver(useFormSchema)
+    })
     const navigate = useNavigate()
+    console.log("Error: ",errors);
 
-    type FormTypes = {
-        remember:boolean;
-        username:string;
-        password?:string;
-        }
-
-    const onSubmitFn = (data:FormTypes) =>{
+    const onSubmitFn = (data:FormType) =>{
         mutate(data)
         console.log(data);
         const result = useFormSchema.safeParse(data)
@@ -46,7 +43,7 @@ export function Login(props:any) {
         const token = response.data.accessToken;
         localStorage.setItem('authToken', token)
         if(token){
-            props.setIsAuthenticated(true)
+            // props.setIsAuthenticated(true)
             navigate('/main')
         }
         return response.data

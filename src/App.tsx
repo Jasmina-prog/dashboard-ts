@@ -12,7 +12,7 @@ import { Carts } from './pages/carts';
 const queryClient = new QueryClient
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  // const [isAuthenticated, setIsAuthenticated] = useState(false)
   const routeData = [
     {
       path:'/main',
@@ -36,13 +36,13 @@ function App() {
       <BrowserRouter>
     <QueryClientProvider client={queryClient}>
         <Routes>
-          <Route path='/' element={<Login setIsAuthenticated={setIsAuthenticated}/>}/>
+          <Route path='/' element={<Login/>}/>
         </Routes>
-    </QueryClientProvider>
+      </QueryClientProvider>
     <Routes>
       {
         routeData.map((el, index)=>{
-          return <Route key={index} path={el.path} element={<ProtectedRoute isAuthenticated={isAuthenticated}>{el.page}</ProtectedRoute>}/>
+          return <Route key={index} path={el.path} element={<ProtectedRoute >{el.page}</ProtectedRoute>}/>
         })
       }
     </Routes>
